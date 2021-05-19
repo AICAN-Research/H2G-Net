@@ -341,3 +341,13 @@ class Unet():
             x = Convolution3D(self.nb_classes, 1, activation='softmax')(x)
 
         return Model(inputs=input_layer, outputs=x)
+
+
+if __name__ == "__main__":
+    network = Unet(input_shape=(1024, 1024, 4), nb_classes=2)
+    network.encoder_spatial_dropout = None
+    network.decoder_spatial_dropout = 0.1
+    network.set_convolutions([8, 16, 32, 64, 128, 128, 256, 256, 512, 256, 256, 128, 128, 64, 32, 16, 8])
+    network.set_bn(True)
+    network.set_renorm(True)
+    model = network.create()
