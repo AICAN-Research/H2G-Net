@@ -1,4 +1,4 @@
-# Hybrid-guiding: a multi-resolution approach for semantic segmentation of gigapixel histopathological images
+# H2G-Net: A multi-resolution approach for semantic segmentation of gigapixel histopathological images
 This repository contains code relevant for the proposed design H2G-Net. The architecture is a cascaded convolutional neural network which is divided into two stages. The first stage, the detection stage, applies a patch-wise classifier across the image and produces a heatmap. In the second stage, the refinement stage, the heatmap concatenated with a low-resolution version of the original WSI is propagated through a fully-connected convolutional autoencoder that produces a final segmentation of the tumour ROI.
 
 ## Setup
