@@ -10,7 +10,7 @@ Please, cite our paper if you find the work useful:
 <pre>
   @MISC{pedersen2021H2GNet,
   title={Hybrid-guiding: a multi-resolution approach for semantic segmentation of gigapixel histopathological images},
-  author={André Pedersen, Erik Smistad, Anna M. Bofin, Tor V. Rise, Vibeke G. Dale, Henrik S. Pettersen, David Bouget, Tor-Arne S. Nordmo, Ingerid Reinertsen, Marit Valla},
+  author={André Pedersen, Erik Smistad, Tor V. Rise, Vibeke G. Dale, Henrik S. Pettersen, David Bouget, Tor-Arne S. Nordmo, Ingerid Reinertsen, Marit Valla},
   year={2021},
   eprint={some.numbers},
   archivePrefix={arXiv},
