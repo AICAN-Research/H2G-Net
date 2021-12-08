@@ -1,4 +1,4 @@
-# H2G-Net: A multi-resolution approach for semantic segmentation of gigapixel histopathological images
+# Hybrid guiding: A multi-resolution refinement approach for semantic segmentation of gigapixel histopathological images
 This repository contains code relevant for the proposed design H2G-Net. We propose a cascaded convolutional neural network for semantic segmentation of breast cancer tumours from whole slide images (WSIs). It is a two-stage design. In the first stage (detection stage), we apply a patch-wise classifier across the image which produces a tumour probability heatmap. In the second stage (refinement stage), we merge the resultant heatmap with a low-resolution version of the original WSI, before we send it to a new fully-connected convolutional neural network that produces a final segmentation of the tumour ROI.
 
 **NOTE: This repository is currently in construction! More to be added!!**
@@ -10,11 +10,11 @@ This repository contains code relevant for the proposed design H2G-Net. We propo
 ## Citation
 Please, cite our paper if you find the work useful:
 <pre>
-  @MISC{pedersen2021H2GNet,
-  title={Hybrid-guiding: A multi-resolution approach for semantic segmentation of gigapixel histopathological images},
-  author={André Pedersen, Erik Smistad, Tor V. Rise, Vibeke G. Dale, Henrik S. Pettersen, David Bouget, Tor-Arne S. Nordmo, Ingerid Reinertsen, Marit Valla},
+  @misc{pedersen2021hybrid,
+  title={Hybrid guiding: A multi-resolution refinement approach for semantic segmentation of gigapixel histopathological images}, 
+  author={André Pedersen and Erik Smistad and Tor V. Rise and Vibeke G. Dale and Henrik S. Pettersen and Tor-Arne S. Nordmo and David Bouget and Ingerid Reinertsen and Marit Valla},
   year={2021},
-  eprint={some.numbers},
+  eprint={2112.03455},
   archivePrefix={arXiv},
   primaryClass={eess.IV}}
 </pre>
@@ -25,7 +25,7 @@ Please, contact andre.pedersen@ntnu.no for any further questions.
 ## Acknowledgements
 Code for the AGU-Net and DAGU-Net architectures were based on the publication:
 <pre>
-  @MISC{bouget2021meningioma,
+  @misc{bouget2021meningioma,
   title={Meningioma segmentation in T1-weighted MRI leveraging global context and attention mechanisms},
   author={David Bouget and André Pedersen and Sayied Abdol Mohieb Hosainey and Ole Solheim and Ingerid Reinertsen},
   year={2021},
