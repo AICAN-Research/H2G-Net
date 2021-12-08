@@ -1,4 +1,4 @@
-# Hybrid guiding       
+# H2G-Net      
 This repository contains the code relevant for the proposed design H2G-Net, which was introduced in the manuscript *"Hybrid guiding: A multi-resolution refinement approach for semantic segmentation of gigapixel histopathological images"*. 
 
 We propose a cascaded convolutional neural network for semantic segmentation of breast cancer tumours from whole slide images (WSIs). It is a two-stage design. In the first stage (detection stage), we apply a patch-wise classifier across the image which produces a tumour probability heatmap. In the second stage (refinement stage), we merge the resultant heatmap with a low-resolution version of the original WSI, before we send it to a new convolutional autoencoder that produces a final segmentation of the tumour ROI.
