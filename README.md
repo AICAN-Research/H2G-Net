@@ -1,6 +1,6 @@
 # H2G-Net
 
-⚠️***Latest: Won best poster award at HMN RHF 2022 conference!***
+⚠️***Latest: Won best poster award at HMN RHF RDR 2022 conference!***
 
 This repository contains the code relevant for the proposed design H2G-Net, which was introduced in the manuscript [*"Hybrid guiding: A multi-resolution refinement approach for semantic segmentation of gigapixel histopathological images"*](https://arxiv.org/abs/2112.03455). 
 
