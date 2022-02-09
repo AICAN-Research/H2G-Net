@@ -5,10 +5,6 @@ We propose a cascaded convolutional neural network for semantic segmentation of 
 
 **NOTE: This repository is currently in construction! More to be added!!**
 
-## Setup
-
-## Something...
-
 ## Citation
 Please, cite our paper if you find the work useful:
 <pre>
