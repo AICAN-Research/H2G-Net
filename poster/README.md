@@ -1,16 +1,11 @@
-# LaTex Poster for TOM-Net (CVPR 2018)
+# Poster for H2G-Net (HMN RHF 2022)
 
-## Poster Example
-<p align="center">
-    <img src='images/sample.png' width="800" > <br>
-</p>
+⚠️***Latest: Won best poster award at conference!***
 
-## Introduction
-This code stores the LaTex source code for building the poster for TOM-Net (CVPR 2018). This poster is based on the amazing [LaTex Poster Template](http://www.brian-amberg.de/uni/poster/). You may try to design your own poster based on this example. Please refer to (http://www.brian-amberg.de/uni/poster/) for more examples and FAQ.
+This repository contains the source code relevant for reproducing the poster I made for the Regional digital research conference in Central Norway Regional Health Authority (HMN RHF 2022).
 
-- Open `poster_landscape.pdf` to see the built poster.
+Simply open the [poster.pdf](https://github.com/andreped/H2G-Net/blob/main/poster/poster.pdf) file to see the compiled PDF of the poster. Source code (LaTeX) is directly compatible with Overleaf.
 
-- Type `Make` to rebuild the poster.
-
-## More LaTex Poster Examples
-- [PS-FCN: A Flexible Learning Framework for Photometric Stereo (ECCV 2018)](https://github.com/guanyingc/PS-FCN_Poster_LaTex)
+---
+### Acknowledgements
+The source code was based on the [PS-FCN_Poster_LaTex](https://github.com/guanyingc/TOM-Net_Poster_LaTex).
