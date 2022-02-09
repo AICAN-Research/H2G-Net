@@ -1,0 +1,351 @@
+\documentclass[portrait,a0paper,fontscale=0.292]{baposter}
+%\documentclass[portrait,a0paper,fontscale=0.292,finalpaperheight=1189mm,finalpaperwidth=841mm]{baposter}
+
+\usepackage[vlined]{algorithm2e}
+\usepackage{times}
+\usepackage{calc}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{relsize}
+\usepackage{multirow}
+\usepackage{booktabs}
+
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage[T1]{fontenc}
+\usepackage{ae}
+\usepackage{enumitem}
+
+\usepackage{svg}
+\usepackage{amsmath} % you need amsmath as the demo includes a use of \eqref
+
+\usepackage{adjustbox}  % for resizing tables to fit page
+
+\usepackage{colortbl}
+\usepackage{xcolor}
+%\graphicspath{{images/}}
+
+\setlist[itemize]{leftmargin=*,nosep}
+ \setlength{\columnsep}{0.7em}
+ \setlength{\columnseprule}{0mm}
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % Save space in lists. Use this after the opening of the list
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \newcommand{\compresslist}{%
+ \setlength{\itemsep}{0pt}%
+ \setlength{\parskip}{0pt}%
+ \setlength{\parsep}{0pt}%
+ }
+\renewcommand{\rmdefault}{ptm} % Arial
+\renewcommand{\sfdefault}{ptm} % Arial
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Begin of Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Here starts the poster
+%%---------------------------------------------------------------------------
+%% Format it to your taste with the options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{poster}{
+ % Show grid to help with alignment
+ grid=false,
+ columns=5,
+ % dimensions of poster
+ %paperwidth=9,
+ %paperheight=16,
+ % Column spacing
+ colspacing=0.7em,
+ % Color style
+ headerColorOne=cyan!20!white!90!black,
+ borderColor=cyan!30!white!90!black,
+ % Format of textbox
+ textborder=faded,
+ % Format of text header
+ headerborder=open,
+ headershape=roundedright,
+ headershade=plain,
+ background=none,
+ bgColorOne=cyan!10!white,
+ headerheight=0.13\textheight} %0.09\textheight}
+ % Eye Catcher
+ {
+      %\includegraphics[width=0.10\linewidth]{AICAN_logo/logo_AICAN.pdf}
+      \includegraphics[width=0.15\linewidth]{figures/AICAN_logo/logo_AICAN.png}
+      %\includesvg[width=0.10\linewidth]{AICAN_logo/logo_AICAN.svg}
+      \makebox[0.010\textwidth]{} 
+ }
+ % Title
+ {\sc\huge\bf H2G-Net: A multi-resolution refinement approach for semantic segmentation of gigapixel histopathological images}
+ % Authors
+ %{\vspace{0.3em} André Pedersen, Erik Smistad, Tor V. Rise, Vibeke G. Dale, Henrik S. Pettersen, Tor-Arne S. Nordmo, David Bouget, Ingerid Reinertsen, Marit Valla \\[0.2em]
+ %}
+ {\vspace{0.3em} André Pedersen$^{1,2}$, Erik Smistad$^{3,4}$, Tor V. Rise$^{1,5}$, Vibeke G. Dale$^{1,5}$, Henrik S. Pettersen$^{1,5}$, Tor-Arne S. Nordmo$^{6}$, David Bouget$^{4}$, Ingerid Reinertsen$^{3,4}$, and Marit Valla$^{1,2,5,7}$ \\[0.2em]
+ {\small{$^1$~IKOM, NTNU, $^2$~Clinic of Surgery, St. Olavs hospital, $^3$~ISB, NTNU $^4$~SINTEF, NTNU, $^5$~Dept. of Pathology, St. Olavs hospital, $^6$~IFI, UiT, $^7$~Clinic of Laboratory Medicine, St. Olavs hospital\vspace{-3.0em}}%\\[0.01em] }
+ }
+ }
+ % University logo
+ %{
+ %   \begin{tabular}{r}
+ %       \includegraphics[width=0.15\linewidth]{cropped-Logo_ECCV18_RGB_1200x280}
+ %   \end{tabular}
+ %}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Now define the boxes that make up the poster
+%%%---------------------------------------------------------------------------
+%%% Each box has a name and can be placed absolutely or relatively.
+%%% The only inconvenience is that you can only specify a relative position 
+%%% towards an already declared box. So if you have a box attached to the 
+%%% bottom, one to the top and a third one which should be inbetween, you 
+%%% have to specify the top and bottom boxes before you specify the middle 
+%%% box.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\headerbox{\bf\color{blue} Problem Definition and Contribution}{name=contribution,column=0,row=0,span=3}{
+\vspace{-2.0em}\headerbox{\bf\color{blue} Objectives and contributions}{name=contribution,column=0,row=0,span=3}{
+    \textbf{\color{blue}Goal:} Accurate and rapid segmentation of breast cancer in histopathological images.
+    
+    \iffalse
+    \begin{center}
+        \vspace{-0.8em}
+        \centering\includegraphics[width=0.8\linewidth]{images/Intro}
+    \end{center}
+    \fi
+    
+    \vspace{0.5em}
+    \textbf{\color{blue}Clinical motivation} \\
+    Existing solutions are:
+    \begin{itemize}
+    % Existing solutions are: 
+    %   - Computationally expensive
+    %   - Not open-access
+    %   - Not user-friendly
+        \item Too computationally expensive or slow for routine usage.  % or 
+        \item Not open-access or user-friendly.
+        \item Do not efficiently use high and low-resolution information.
+        %\item Existing methods are either too computationally expensive for routine usage or struggle to produce satisfactory segmentation on both high and low resolution.
+        %produce robust segmentations on a global level.
+        %\item Existing solutions are often not open or easily accessible for clinicians and researchers, even though it is an important first step in breast cancer diagnostics.
+    \end{itemize}
+
+    %\vspace{-0.8em}
+    \vspace{0.8em}
+    \textbf{\color{blue}Key Contributions:}
+    %A flexible deep learning framework for photometric stereo that 
+    \begin{itemize}
+      \item A simple, rapid, and efficient model for automatic breast cancer segmentation.
+      \item A two-stage, multi-scale convolutional neural network, H2G-Net.  % (Figure 2).
+      \item A novel framework for memory efficient, hierarchical-balanced, random patch sampling.  % (Figure 3).
+      % model -> FastPathology (icon) figure
+      %patch representations.
+    \end{itemize}
+    \vspace{0.1em}
+}
+
+\headerbox{\bf\color{blue} Dataset}{name=dataset,column=3,span=2}{
+%\headerbox{\bf\color{blue} Materials}{name=dataset,column=3,span=2}{
+    %\textbf{\color{blue}Dataset:}
+    
+    %\vspace{-2.0em}
+    \begin{minipage}{1.0\linewidth}
+        \begin{itemize}
+            \item Ground truth: 624 whole slide images (WSIs) of breast cancer marked manually by pathologists.
+            \item Norwegian breast cancer cohort, BCS-1
+            \item WSIs were split into training, validation, and test sets.
+            %\item The manual annotations were guided by a pretrained deep segmentation model.
+            %\item Final annotations were assessed for consistency and corrected where needed by a pathologist specialized in breast cancer pathology.
+        \end{itemize}
+    \end{minipage}
+    %\vspace{-0.6em}
+    \begin{minipage}{1.0\linewidth}
+        \begin{center}
+            %Data generation timeline and process
+            %\includegraphics[width=\linewidth]{images/syn_data_sample}
+            \includegraphics[width=\linewidth]{figures/data-diagram-figure.pdf}
+        \end{center}
+    \end{minipage}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\headerbox{\bf\color{blue} Methodology}{name=method,column=0,below=dataset,span=5}{
+\begin{minipage}[t]{0.5\textwidth}
+    \textbf{\color{blue}Inference pipeline of H2G-Net:} 
+    %\vspace{-0.5em}
+    \begin{center}
+     \includegraphics[width=0.87\textwidth]{figures/pipeline_example.png}
+    \end{center}
+    %\vspace{-0.8em}
+    %\begin{itemize}
+    %    \item PS-FCN consists of three components, namely a shared-weight feature extractor, a fusion layer, and a normal regression network.
+    %\end{itemize}
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+    \textbf{\color{blue}Hierarchical sampling scheme:}
+    %\vspace{-0.5em}
+    \begin{center}
+        \includegraphics[width=1.0\textwidth]{figures/hierarchical-sampling.png}
+    \end{center}
+    %\textbf{\color{blue}{Integration of solution into open software (FastPathology):}}
+    %\begin{center}
+    %    \includegraphics[width=0.5\linewidth]{figures/poster_h2g_net.png}
+    %\end{center}
+    %\iffalse
+    \textbf{\color{blue}Loss function for detection stage:}
+    \vspace{-0.5em}
+    \begin{align*}
+      %\mathcal{L}^c = \alpha^c_{ms} \mathcal{L}_{ms} + \alpha^c_{ar} \mathcal{L}_{ar} + \alpha^c_{fr} \mathcal{L}_{fr} + \alpha^c_{ir} \mathcal{L}_{ir}
+      \hspace{-0.75em}\mathcal{L}_{\text{CWCE}} = -\frac{1}{K_b}\sum_{k=1}^{K_b}\sum_{c=1}^{C}\sum_{i=1}^{B}\mathds{1}(q_{i,k}=k)y_{i,c}log(p_{i,c})
+    \end{align*}
+    %where $\mathbf{N}_{ij}$ and $\tilde{\mathbf{N}}_{ij}$ denote the predicted normal and the ground truth, respectively.
+    
+    \begin{itemize}
+        %\vspace{-0.5em}
+        \item $\mathcal{L}_{CWCE}$: Cluster-weighted categorical cross-entropy loss
+        \item $K_b$: Cluster frequency for a given mini batch of size $B$
+        \item $y$: Current ground truth class of a total number of classes $C$
+        \item $p, q$: Class and cluster prediction for a given class $c$ and cluster $k$
+    \end{itemize}
+    
+    %\textbf{\color{blue}Loss function for refinement stage:}
+    %\vspace{-0.5em}
+    %\begin{align}
+    %    \mathcal{L}_{Dice} = \frac{2\cdot \sum_{i=1}^{B} y_{i}\cdot g_{i} \varepsilon}{\sum_{i=1}^{B} p_{i}^2 + \sum_{i=1}^{B} y_{i}^2 + \varepsilon}
+    %\end{align}
+    %\fi
+\end{minipage}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\headerbox{\bf\color{blue} Experiments \& Results}{name=results,column=0,below=method,row=0,span=5}{
+    %\begin{minipage}[t]{0.5\textwidth}
+        %\textbf{\color{blue}Synthetic Datasets for Training:} 
+        %\vspace{-0.2em}
+        %\begin{center}
+        %    \includegraphics[width=\textwidth]{images/datasets.pdf}
+        %\end{center}
+    %\end{minipage}
+    %\begin{minipage}[t]{0.6\textwidth}
+    %    \textbf{\color{blue}Quantitative Results on Spheres Rendered with 100 Different Materials:} 
+    %    \vspace{-0.5em}
+    %    \begin{center}
+    %        \includegraphics[width=0.95\textwidth]{images/100brdf.png}
+    %    \end{center}
+    %\end{minipage}
+    
+    \begin{minipage}[t]{0.5\textwidth}
+        \textbf{\color{blue}Quantitative Results on BCS-1 test set:} \\
+        
+        \vspace{-0.3em}
+        \adjustbox{width=\linewidth}{
+        \begin{tabular}{rlccc}
+            \toprule
+            %\multicolumn{2}{l}{\textbf{Architecture}} & \textbf{Recall} & \textbf{Precision} & \textbf{DSC} \\
+            & \textbf{Designs} & \textbf{Recall} & \textbf{Precision} & \textbf{DSC} \\
+            \midrule
+            \textbf{(\rom{1})} & \textbf{Otsu} & $0.990 \pm 0.027$ & $0.534 \pm 0.200$ & $0.669 \pm 0.179$ \\
+            \textbf{(\rom{2})} & \textbf{UNet-LR} & $0.931 \pm 0.113$ & $0.851 \pm 0.165$ & $0.874 \pm 0.128$ \\
+            \textbf{(\rom{3})} & \textbf{Inc-PW} & $0.881 \pm 0.118$ & $0.909 \pm 0.099$ & $0.887 \pm 0.089$ \\
+            \textbf{(\rom{4})} & \textbf{Mob-PW} & $0.879 \pm 0.123$ & $0.907 \pm 0.100$ & $0.885 \pm 0.094$ \\
+            \textbf{(\rom{5})} & \textbf{Mob-KM-PW} & $0.853 \pm 0.124$ & $0.909 \pm 0.097$ & $0.872 \pm 0.092$ \\
+            %\textbf{(\rom{6})} & \textcolor{red}{\textbf{Mob-PW-UNet}} & $0.944 \pm 0.074$ & $\boldsymbol{0.929 \pm 0.088}$ & $\boldsymbol{0.933 \pm 0.069}$ \\
+            \textbf{(\rom{6})} & \textbf{Mob-PW-AGUNet} & $\boldsymbol{0.954 \pm 0.066}$ & $0.909 \pm 0.097$ & $0.927 \pm 0.072$ \\
+            \textbf{(\rom{7})} & \textbf{Mob-PW-DAGUNet} & $0.942 \pm 0.075$ & $0.922 \pm 0.091$ & $0.928 \pm 0.072$ \\
+            \textbf{(\rom{8})} & \textbf{Mob-PW-DoubleUNet} & $0.949 \pm 0.073$ & $0.919 \pm 0.093$ & $0.929 \pm 0.074$ \\
+            \textbf{(\rom{9})} & \textbf{H2G-Net} & $0.944 \pm 0.074$ & $\boldsymbol{0.929 \pm 0.088}$ & $\boldsymbol{0.933 \pm 0.069}$ \\
+            \bottomrule
+        \end{tabular}
+        }
+        %\vspace{-0.5em}
+        \vspace{0.5em}
+        \begin{itemize}
+            \item An ablation study was conducted to find the most impactful components of the pipeline. The numbers represent performance metrics (the higher the better).
+            %\item The best performing method, \textcolor{red}{Mob-PW-UNet}, is our \textcolor{red}{H2G-Net} architecture.
+            %\item The numbers represents performance metrics (the higher the better).
+            \item LR: low-resolution, PW: patch-wise, Inc: InceptionV3, Mob: MobileNetV2, DSC: dice similarity coefficient
+        \end{itemize}
+        
+        \vspace{1.0em}
+        \textbf{\color{blue}Runtime measurements (in seconds) using H2G-Net:}\\ %[0.2em]
+        \vspace{-0.9em}
+        \begin{center}
+            \resizebox{8.5cm}{!}{
+            \begin{tabular}{llccc}
+                \toprule
+                \textbf{} & \textbf{Patch-wise} & \textbf{Refinement} & \textbf{Total} \\
+                \midrule
+                \textbf{OpenVINO} & $57.32 \pm 0.20$ & $0.75 \pm 0.01$ & $58.07 \pm 0.20$ \\
+                \textbf{TensorRT} & $39.88 \pm 0.62$ & $0.38 \pm 0.00$ & $40.26 \pm 0.62$ \\
+                \bottomrule
+            \end{tabular}
+            }
+        \end{center}
+        \vspace{0.5em}
+        \begin{itemize}
+            \item Runtime measurements were conducted on a representative $\times$400 WSI, using both the OpenVINO (CPU) and TensorRT (GPU) inference engines.
+            %\item Measurements for both stages in the pipeline (patch-wise \& refinement) and overall were reported.
+        \end{itemize}
+    \end{minipage}
+    ~
+    \begin{minipage}[t]{0.5\textwidth}
+        \textbf{\color{blue}\hspace{12pt}Qualitative Results on BCS-1 test set:} \\[-1.5em]
+        %\vspace{-0.4em}
+        \begin{center}
+            \includegraphics[width=0.99\textwidth]{figures/subplots_segmentations.png}
+        \end{center}
+        
+        %\hfill\begin{minipage}{0.46\linewidth}
+        \vspace{0.2em}\hspace{5.0em}\begin{minipage}{0.4\textwidth}
+            \begin{center}
+                %\textbf{Project Webpage}: \\
+                \textbf{Published article}: \\
+                \vspace{0.5em}\textbf{Paper} \& \textbf{Code} \& \textbf{Model}
+            \end{center}
+        \end{minipage}
+        \begin{minipage}{0.20\linewidth}
+            \begin{center}
+                \includegraphics[width=\linewidth]{figures/qrcode.png}
+                %\includesvg[width=\linewidth]{figures/qrcode.svg}
+            \end{center}
+        \end{minipage}
+    \end{minipage}
+
+    %\vspace{0.5em}
+}
+
+%\headerbox{}{name=bottom,column=0,below=results,row=0,span=5}{
+%test something here
+%}
+
+\headerbox{}%
+{name=foottext, column=0, span=5, above=bottom,%textborder=none,
+ headerborder=none,boxheaderheight=0pt}{
+ \small{This work was supported by The Liaison Committee for Education, Research and Innovation in Central Norway; The Joint Research Committee between St. Olavs hospital and the Faculty of Medicine and Health Sciences, NTNU (FFU); The Cancer Foundation, St. Olavs hospital, Trondheim University Hospital; and The Clinic of Laboratory Medicine, St. Olavs hospital, Trondheim University Hospital.}
+}
+
+\iffalse
+\headerbox{}%
+{name=foottext, column=0, span=5, above=bottom,%textborder=none,
+ headerborder=none,boxheaderheight=0pt}{
+ %\footnotesize{
+ \scriptsize{
+ \address[1]{ Department of Clinical and Molecular Medicine, Norwegian University of Science and Technology, NO-7491 Trondheim, Norway} \\
+\address[2]{ Clinic of Surgery, St. Olavs Hospital, Trondheim University Hospital, NO-7030 Trondheim, Norway} \\
+\address[3]{ Department of Circulation and Medical Imaging, Norwegian University of Science and Technology, NO-7491 Trondheim, Norway} \\
+\address[4]{ Department of Health Research, SINTEF Digital, NO-7465 Trondheim, Norway} \\
+\address[5]{ Department of Pathology, St. Olavs Hospital, Trondheim University Hospital, NO-7030 Trondheim, Norway} \\
+\address[6]{ Department of Computer Science, UiT The Arctic University of Norway, NO-9019 Tromsø, Norway} \\
+\address[7]{ Clinic of Laboratory Medicine, St. Olavs hospital, Trondheim University Hospital, NO-7030 Trondheim, Norway}
+}
+}
+\fi
+
+\end{poster}
+
+\end{document}
