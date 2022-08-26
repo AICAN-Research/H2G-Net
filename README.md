@@ -10,6 +10,18 @@ Other useful scripts and tips for importing/exporting predictions/annotations to
 
 **NOTE: This repository is currently in construction! More to be added!!**
 
+## Test the model on your own data
+You can easily test the H2G-Net model using [FAST](https://fast.eriksmistad.no).  
+First make sure you have [all requirements for FAST installed](https://fast.eriksmistad.no/install.html).  
+Then install FAST using pip, and run the breast tumour segmentation pipeline from your terminal.  
+This will download the model, run it on the WSI you specify and visualize the results.
+```bash
+pip install pyfast
+runPipeline --datahub breast-tumour-segmentation --file path/to/your/whole-slide-image.vsi
+```
+
+Or you can test the model in the graphical user interface [FastPathology](https://github.com/AICAN-Research/FAST-Pathology) which allows you to run the model on multiple images, change the visualization of the segmentation and export the segmentation to disk.
+
 ## Citation
 Please, cite our paper if you find the work useful:
 <pre>
