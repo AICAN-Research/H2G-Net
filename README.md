@@ -1,14 +1,31 @@
 # H2G-Net
 
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Paper](https://zenodo.org/badge/DOI/10.3389/fneur.2022.932219.svg)](https://www.frontiersin.org/articles/10.3389/fmed.2021.816281/full)  
+
 ⚠️***Latest: Won best poster award at the HMN RHF RDR 2022 conference!***
 
-This repository contains the code relevant for the proposed design H2G-Net, which was introduced in the manuscript [*"Hybrid guiding: A multi-resolution refinement approach for semantic segmentation of gigapixel histopathological images"*](https://arxiv.org/abs/2112.03455), **accepted** for publication in Frontiers in Medicine.
-
-We propose a cascaded convolutional neural network for semantic segmentation of breast cancer tumours from whole slide images (WSIs). It is a two-stage design. In the first stage (detection stage), we apply a patch-wise classifier across the image which produces a tumour probability heatmap. In the second stage (refinement stage), we merge the resultant heatmap with a low-resolution version of the original WSI, before we send it to a new convolutional autoencoder that produces a final segmentation of the tumour ROI.
+This repository contains the code relevant for the proposed design H2G-Net, which was introduced in the manuscript [*"H2G-Net: A multi-resolution refinement approach for segmentation of breast cancer region in gigapixel histopathological images"*](https://www.frontiersin.org/articles/10.3389/fmed.2022.971873/full), published in Frontiers in Medicine.
 
 Other useful scripts and tips for importing/exporting predictions/annotations to/from QuPath <-> FastPathology can be found in the [NoCodeSeg](https://github.com/andreped/NoCodeSeg) repository.
 
 **NOTE: This repository is currently in construction! More to be added!!**
+
+## Brief summary of the paper and contributions
+
+We propose a cascaded convolutional neural network for semantic segmentation of breast cancer tumours from whole slide images (WSIs). It is a two-stage design. In the first stage (detection stage), we apply a patch-wise classifier across the image which produces a tumour probability heatmap. In the second stage (refinement stage), we merge the resultant heatmap with a low-resolution version of the original WSI, before we send it to a new convolutional autoencoder that produces a final segmentation of the tumour ROI.
+
+- The paper proposed a hierarchically-balanced sampling scheme to adjust for the many data imbalance problems:
+
+<img src="https://user-images.githubusercontent.com/29090665/190863187-a239afc5-7a98-48df-9b5e-f0bd899b2d76.jpg" width="80%">
+
+- Second, a two-stage cascaded convolutional neural network design, H2G-Net, was proposed that utilizes a refinement network to refine generated patch-wise predictions to improve low-resolution segmentation of breast cancer region.
+
+<img src="https://user-images.githubusercontent.com/29090665/190863086-ced55fbb-b4ed-4b4e-be56-3b9c4b6d474d.jpg" width="80%">
+
+- The final model has been integrated into the open software [FastPathology](https://github.com/AICAN-Research/FAST-Pathology) and only takes ~1 minute to use on a full whole slide image using the CPU.
+
+- Developed annotated dataset of 624 whole slide images of breast cancer.
 
 ## Test the model on your own data
 You can easily test the H2G-Net model using [FAST](https://fast.eriksmistad.no).  
@@ -25,13 +42,15 @@ Or you can test the model in the graphical user interface [FastPathology](https:
 ## Citation
 Please, cite our paper if you find the work useful:
 <pre>
-  @misc{pedersen2021hybrid,
-  title={Hybrid guiding: A multi-resolution refinement approach for semantic segmentation of gigapixel histopathological images}, 
-  author={André Pedersen and Erik Smistad and Tor V. Rise and Vibeke G. Dale and Henrik S. Pettersen and Tor-Arne S. Nordmo and David Bouget and Ingerid Reinertsen and Marit Valla},
-  year={2021},
-  eprint={2112.03455},
-  archivePrefix={arXiv},
-  primaryClass={eess.IV}}
+  @article{10.3389/fmed.2022.971873,
+  author={Pedersen, André and Smistad, Erik and Rise, Tor V. and Dale, Vibeke G. and Pettersen, Henrik S. and Nordmo, Tor-Arne S. and Bouget, David and Reinertsen, Ingerid and Valla, Marit},
+  title={H2G-Net: A multi-resolution refinement approach for segmentation of breast cancer region in gigapixel histopathological images},
+  journal={Frontiers in Medicine},
+  volume={9},
+  year={2022},
+  url={https://www.frontiersin.org/articles/10.3389/fmed.2022.971873},
+  doi={10.3389/fmed.2022.971873},
+  issn={2296-858X}}
 </pre>
 
 ## Contact
