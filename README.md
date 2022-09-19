@@ -39,7 +39,7 @@ runPipeline --datahub breast-tumour-segmentation --file path/to/your/whole-slide
 
 Or you can test the model in the graphical user interface [FastPathology](https://github.com/AICAN-Research/FAST-Pathology) which allows you to run the model on multiple images, change the visualization of the segmentation and export the segmentation to disk.
 
-## Citation
+## How to cite
 Please, cite our paper if you find the work useful:
 <pre>
   @article{10.3389/fmed.2022.971873,
