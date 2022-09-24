@@ -1,7 +1,7 @@
 # H2G-Net
 
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![Paper](https://zenodo.org/badge/DOI/10.3389/fneur.2022.932219.svg)](https://www.frontiersin.org/articles/10.3389/fmed.2021.816281/full)  
+[![Paper](https://zenodo.org/badge/DOI/10.3389/fneur.2022.932219.svg)](https://doi.org/10.3389/fmed.2022.971873)  
 
 ⚠️***Latest: Won best poster award at the HMN RHF RDR 2022 conference!***
 
