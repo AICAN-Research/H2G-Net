@@ -1,21 +1,20 @@
-# batch gen
 import random
 import h5py
 import numpy as np
 from scipy.ndimage.interpolation import rotate, shift, affine_transform, zoom
 from numpy.random import random_sample, rand, random_integers, uniform
-# import matplotlib.pyplot as plt
 import cv2
 from tqdm import tqdm
-# from astropy.nddata.utils import block_reduce
-# from staintools.LuminosityStandardizer import standardize
 import staintools
 import matplotlib.pyplot as plt
 import scipy
 from copy import deepcopy
+import numba as nb
+from tensorflow.python.keras.utils.data_utils import Sequence
+import multiprocessing as mp
+from timeit import time
 
 
-# quite slow -> Don't use this! Not optimized and doesn't fit our problem!
 def add_affine_transform2(input_im, output, max_deform):
     random_20 = uniform(-max_deform, max_deform, 2)
     random_80 = uniform(1 - max_deform, 1 + max_deform, 2)
@@ -34,16 +33,6 @@ def add_affine_transform2(input_im, output, max_deform):
     return input_im, output
 
 
-"""
-###
-input_im:		input image, 5d ex: (1,64,256,256,1) , (dimi0, z, x, y, channel)
-output:			ground truth, 5d ex: (1,64,256,256,2), (dimi0, z, x, y, channel)
-max_shift:		the maximum amount th shift in a direction, only shifts in x and y dir
-###
-"""
-
-
-# faster and sexier? - mvh André :)
 def add_shift2(input_im, output, max_shift):
     # randomly choose which shift to set for each axis (within specified limit)
     sequence = [round(uniform(-max_shift, max_shift)), round(uniform(-max_shift, max_shift)), 0]
@@ -55,17 +44,6 @@ def add_shift2(input_im, output, max_shift):
 
     return input_im, output
 
-
-"""
-####
-input_im:		input image, 5d ex: (1,64,256,256,1) , (dimi0, z, x, y, channel)
-output:			ground truth, 5d ex: (1,64,256,256,2), (dimi0, z, x, y, channel)
-min/max_angle: 	minimum and maximum angle to rotate in deg, positive integers/floats.
-####
-"""
-
-
-# -> Only apply rotation in image plane -> faster and unnecessairy to rotate xz or yz
 
 def add_rotation2(input_im, output, max_angle):
     # randomly choose how much to rotate for specified max_angle
@@ -84,11 +62,6 @@ def add_rotation2(input_im, output, max_angle):
     return input_im, output
 
 
-"""
-flips the array along random axis, no interpolation -> super-speedy :)
-"""
-
-
 def add_flip2(input_im, output):
     # randomly choose whether or not to flip
     if (random_integers(0, 1) == 1):
@@ -100,11 +73,6 @@ def add_flip2(input_im, output):
         output = np.flip(output, flip_ax)
 
     return input_im, output
-
-
-"""
-performs intensity transform on the chunk, using gamma transform with random gamma-value
-"""
 
 
 def add_gamma2(input_im, output, r_limits):
@@ -212,29 +180,6 @@ def add_HEstain2(input_im, output):
     return input_im, output
 
 
-'''
-def add_HEstain2_all(input_im, output):
-	input_shape = input_im.shape
-
-	# for each image in stack -> transform to RGB uint8
-	for i in range(input_im.shape[0]):
-		input_im[i] *= 255
-	input_im = input_im.astype(np.uint8)
-
-	# define augmentation algorithm -> should only do this the first time!
-	if not 'augmentor' in globals():
-		global augmentor
-		augmentor = staintools.StainAugmentor(method='vahadane', sigma1=0.2, sigma2=0.2)
-
-	# apply augmentation on all slices
-	augmentor.fit(input_im)
-
-	# for each image extract augmented images
-	input_out = np.zeros(input_shape)
-	#for i in range()
-'''
-
-
 def add_rotation2_ll(input_im, output):
     # randomly choose rotation angle: 0, +-90, +,180, +-270
     k = random_integers(0, high=3)  # -> 0 means no rotation
@@ -277,9 +222,6 @@ def add_hsv2(input_im, output, max_shift):
     return input_im, output
 
 
-import numba as nb
-
-
 @nb.jit(nopython=True)
 def sc_any(array):
     for x in array.flat:
@@ -293,15 +235,6 @@ def maxminscale(tmp):
         tmp = tmp - np.amin(tmp)
         tmp = tmp / np.amax(tmp)
     return tmp
-
-
-"""
-aug: 		dict with what augmentation as key and what degree of augmentation as value
-		->  'rotate': 20 , in deg. slow
-		->	'shift': 20, in pixels. slow
-		->	'affine': 0.2 . should be between 0.05 and 0.3. slow
-		->	'flip': 1, fast
-"""
 
 
 def batch_gen2(file_list, batch_size, aug={}, shuffle_list=True, epochs=1):
@@ -335,26 +268,6 @@ def batch_gen2(file_list, batch_size, aug={}, shuffle_list=True, epochs=1):
 
                 input_im = np.concatenate([input_im, heatmap], axis=-1)
 
-                # preprocessing
-                # input_im = input_im[0] # <- slow!
-                # input_im = np.squeeze(input_im, axis=0)
-                # RGB uint8 (to use staintools)
-                # input_im = (np.round(255 * maxminscale(input_im.copy()))).astype(np.uint8)
-
-                # standardize brightness
-                # input_im = staintools.LuminosityStandardizer.standardize(input_im.astype(np.uint8)).astype(np.float32)
-
-                # maxminscale # <- something wrong with this for RGB images???
-                # input_im[pat] = maxminscale(input_im[pat].copy())
-
-                # cv2.imshow('image', cv2.cvtColor(input_im[0], cv2.COLOR_RGB2BGR))
-                # cv2.waitKey(0)
-                # cv2.destroyAllWindows()
-
-                # input_im = np.expand_dims(input_im, axis=0)
-
-                # del input_im, output
-
                 # apply specified agumentation on both image stack and ground truth
                 if 'rotate_ll' in aug:
                     input_im, output = add_rotation2_ll(input_im, output)
@@ -386,18 +299,6 @@ def batch_gen2(file_list, batch_size, aug={}, shuffle_list=True, epochs=1):
                 if 'shift' in aug:
                     input_im, output = add_shift2(input_im, output, aug['shift'])
 
-                # normalize at the end
-                # im[batch] = im[batch] / 255.
-
-                # print(input_im.shape)
-                # print(output.shape)
-
-                # fig, ax = plt.subplots(1, 3)
-                ##ax[0].imshow(input_im)
-                # ax[1].imshow(output[..., 0], cmap="gray")
-                # ax[2].imshow(output[..., 1], cmap="gray")
-                # plt.show()
-
                 im[batch] = np.expand_dims(input_im, axis=0)
                 gt[batch] = np.expand_dims(output, axis=0)
 
@@ -415,13 +316,6 @@ def batch_length(file_list):
     return length
 
 
-# file_list, batch_size, aug={}, shuffle_list=True, epochs=1
-
-
-# @threadsafe_generator
-from tensorflow.python.keras.utils.data_utils import Sequence
-import multiprocessing as mp
-from timeit import time
 class mpBatchGeneratorCustom(Sequence):
     def __init__(self, file_list, batch_size=1, verbose=False, aug=None, input_shape=(), nb_classes=2, N=1, classes=None, max_q_size=20, max_proc=8, heatmap_guiding=False,
                  deep_supervision=False, hprob=False, arch=None):
@@ -450,27 +344,12 @@ class mpBatchGeneratorCustom(Sequence):
         self.output_shape = file['label'].shape
         file.close()
 
-    #'''
     def __len__(self):
         return int(np.ceil(self.N / self.batch_size))
 
     def __getitem__(self, batch_index):
         sample_indices_for_batch = self.file_list[batch_index * self.batch_size:(batch_index + 1) * self.batch_size]
         return self._generate_batch(sample_indices_for_batch)  # generator batch based on selected patch indices
-
-    '''
-    def __iter__(self):
-        """Creates an infinite generator that iterate over the Sequence.
-        Yields:
-          Sequence items.
-        """
-
-        while True:
-            for item in (self[i] for i in range(len(self))):
-                yield item
-    '''
-
-    #'''
 
     def mpGenerator(self):
         """ Use multiprocessing to generate batches in parallel. """
@@ -572,16 +451,11 @@ class mpBatchGeneratorCustom(Sequence):
 
         return input_im, output
 
-    # def __iter__(self):
-    #    return self.__next__()
-
     def on_epoch_begin(self):
         np.random.shuffle(self.file_list)
 
     def _generate_batch(self, samples):
         # for each epoch, clear batch
-        #im = np.zeros((self.batch_size, self.input_shape[1], self.input_shape[2], self.input_shape[3] + int(self.heatmap_guiding)))
-        #gt = np.zeros((self.batch_size, self.output_shape[1], self.output_shape[2], self.output_shape[3]))
         im = []
         gt = []
 
@@ -604,7 +478,6 @@ class mpBatchGeneratorCustom(Sequence):
                 input_im = np.concatenate([input_im, heatmap], axis=-1)
 
             # augment (image and GT only, no heatmap)
-            #input_im[..., :3], output = self._transform_batch(input_im[..., :3], output)  # @TODO: Need to fix this to handle heatmap stuff also given as input...
             input_im, output = self._transform_batch(input_im, output)
 
             # if deep supervision is enabled, need to generate downsampled versions of the original GT
@@ -618,18 +491,9 @@ class mpBatchGeneratorCustom(Sequence):
                     #new_gt = np.expand_dims(new_gt, axis=0)
                     hierarchical_gt.append(new_gt)
                 output = hierarchical_gt
-            #else:
-                #output = np.expand_dims(output, axis=0)
 
-            # @TODO: Create downsampled versions of the GT for deep supervision
-            #   ... add some code her ...
-
-            #im.append(np.expand_dims(input_im, axis=0))
             im.append(input_im)
             gt.append(output)
-
-            #im[batch] = np.expand_dims(input_im, axis=0)
-            #gt[batch] = np.expand_dims(output, axis=0)
 
         if self.deep_supervision:
             new_batches_y = []
@@ -644,19 +508,9 @@ class mpBatchGeneratorCustom(Sequence):
             gt = np.array(gt)
 
         im = np.array(im)
-        #gt = np.array(gt)
 
         # for DoubleU-Net, we need to provide two identical outputs
         if self.arch == "doubleunet":
             gt = [gt, gt]
 
-        #print(im.shape)
-        #for g in gt:
-        #    print(g.shape)
-
-        #print(im.shape)
-        #print(gt.shape)
-
-        #print(im.shape)
-
-        return im, gt  # [gt[i] for i in range(gt.shape[0])])
+        return im, gt

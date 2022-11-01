@@ -1,7 +1,6 @@
 import tensorflow as tf
 from tensorflow.python.keras.optimizer_v2.optimizer_v2 import OptimizerV2
 from tensorflow.python import ops, math_ops, state_ops, control_flow_ops
-# from tensorflow.python.keras import backend_config
 from tensorflow.keras.optimizers import Optimizer
 import tensorflow.keras.backend as K
 
@@ -169,6 +168,7 @@ class AccumOptimizer(Optimizer):
             def get_gradients(loss, params):
                 return [ag / self.steps_per_update for ag in self.accum_grads]
             self.optimizer.get_gradients = get_gradients
+
     def get_updates(self, loss, params):
         self.updates = [
             K.update_add(self.iterations, 1),
@@ -183,6 +183,7 @@ class AccumOptimizer(Optimizer):
         self.updates.extend(self.optimizer.get_updates(loss, params)[1:])
         self.weights.extend(self.optimizer.weights)
         return self.updates
+
     def get_config(self):
         iterations = K.eval(self.iterations)
         K.set_value(self.iterations, 0)
