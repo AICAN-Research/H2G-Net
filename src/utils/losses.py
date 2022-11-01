@@ -2,7 +2,6 @@ import tensorflow as tf
 from tensorflow.python.keras import backend as K
 
 
-# @tf.contrib.eager.function
 def cluster_weighted_loss_metric(ys_true, ys_pred, nb_classes=2, nb_clusters=10):
     ys_true = [ys_true[:, :nb_classes], ys_true[:, nb_classes:]]
     ys_pred = [ys_pred[:, :nb_classes], ys_pred[:, nb_classes:]]
