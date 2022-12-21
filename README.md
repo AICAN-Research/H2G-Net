@@ -17,11 +17,15 @@ We propose a cascaded convolutional neural network for semantic segmentation of 
 
 - The paper proposed a hierarchically-balanced sampling scheme to adjust for the many data imbalance problems:
 
+<p align="center">
 <img src="https://user-images.githubusercontent.com/29090665/190863187-a239afc5-7a98-48df-9b5e-f0bd899b2d76.jpg" width="80%">
+</p>
 
 - Second, a two-stage cascaded convolutional neural network design, H2G-Net, was proposed that utilizes a refinement network to refine generated patch-wise predictions to improve low-resolution segmentation of breast cancer region.
 
+<p align="center">
 <img src="https://user-images.githubusercontent.com/29090665/190863086-ced55fbb-b4ed-4b4e-be56-3b9c4b6d474d.jpg" width="80%">
+</p>
 
 - The final model has been integrated into the open software [FastPathology](https://github.com/AICAN-Research/FAST-Pathology) and only takes ~1 minute to use on a full whole slide image using the CPU.
 
