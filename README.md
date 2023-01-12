@@ -30,9 +30,9 @@ We propose a cascaded convolutional neural network for semantic segmentation of 
 - Developed annotated dataset of 624 whole slide images of breast cancer.
 
 ## Test the model on your own data
-You can easily test the H2G-Net model using [FAST](https://fast.eriksmistad.no).  
-First make sure you have [all requirements for FAST installed](https://fast.eriksmistad.no/install.html).  
-Then install FAST using pip, and run the breast tumour segmentation pipeline from your terminal.  
+You can easily test the H2G-Net model using [FAST](https://fast.eriksmistad.no).
+First make sure you have [all requirements for FAST installed](https://fast.eriksmistad.no/install.html).
+Then install FAST using pip, and run the breast tumour segmentation pipeline from your terminal.
 This will download the model, run it on the WSI you specify and visualize the results.
 ```bash
 pip install pyfast
