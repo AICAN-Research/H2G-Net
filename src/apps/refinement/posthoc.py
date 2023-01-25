@@ -142,42 +142,6 @@ def main():
 
     print(out_pd)
 
-    exit()
-
-    # since I had the mean and standard deviations, let us just perform simple t-tests for simplicity first
-    method = np.array(["otsu", "unet-lr", "inc-pw", "mob-pw", "mob-km-pw", "mob-km-pw-unet", "mob-km-pw-agunet", "mob-km-pw-dagunet", "mob-km-pw-doubleunet"])
-    dsc_mu = np.array([0.670, 0.833, 0.823, 0.744, 0.843, 0.909, 0.926, 0.922, 0.923])
-    dsc_std = np.array([0.176, 0.174, 0.139, 0.176, 0.124, 0.177, 0.070, 0.091, 0.076])
-    N = 8 + 36 + 20  # total number of WSIs in the test set
-
-    order = np.array(range(len(method)))
-
-    res = np.zeros((len(method), len(method)), dtype=np.float32)
-    pv = res.copy()
-    fdr = res.copy()
-
-    for i in range(len(method)):
-        for j in range(i, len(method)):
-            if i != j:
-                # @FIXME: Doing T-tests here are bad! The reason is that studying ALL contrasts means that all tests are NOT independent. Thus, Tukey HSD should be used instead!!!
-                tt = df_t_statistic(dsc_mu[i], dsc_mu[j], dsc_std[i], dsc_std[j], N)
-                res[i, j] = tt
-                pv[i, j] = stats.t.sf(np.abs(tt), N - 1) * 2  # two-sided p-value = Prob(abs(t) > tt)
-
-    tmp = pv[np.triu_indices_from(pv, k=1)]
-
-    rejected, p_vals_corrected, _, _ = multipletests(tmp, alpha=0.05, method="fdr_bh", is_sorted=False)
-    p_vals_corrected = create_upper_matrix(p_vals_corrected, size=len(method), val=1)
-
-    print("T-statistic: ")
-    print(array2pretty(res, method))
-
-    print("p-value: ")
-    print(array2pretty(pv, method))
-
-    print("correct p-values: ")
-    print(array2pretty(p_vals_corrected, method))
-
 
 if __name__ == "__main__":
     main()
