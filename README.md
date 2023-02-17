@@ -9,6 +9,8 @@ This repository contains the code relevant for the proposed design H2G-Net, whic
 
 Other useful scripts and tips for importing/exporting predictions/annotations to/from QuPath <-> FastPathology can be found in the [NoCodeSeg](https://github.com/andreped/NoCodeSeg) repository.
 
+**Disclaimer:** The source code is provided as is, only to demonstrate how to define the architecture and design used in the paper. The code itself requires modifications to run on a new dataset, as it contains various hard-coded solutions, but all components are provided, as well as the code for training and evaluating the refinement model.
+
 ## Brief summary of the paper and contributions
 
 We propose a cascaded convolutional neural network for semantic segmentation of breast cancer tumours from whole slide images (WSIs). It is a two-stage design. In the first stage (detection stage), we apply a patch-wise classifier across the image which produces a tumour probability heatmap. In the second stage (refinement stage), we merge the resultant heatmap with a low-resolution version of the original WSI, before we send it to a new convolutional autoencoder that produces a final segmentation of the tumour ROI.
