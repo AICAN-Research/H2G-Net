@@ -27,12 +27,12 @@ RUN mkdir -p /etc/OpenCL/vendors && \
 ENV NVIDIA_VISIBLE_DEVICES all
 ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
 
-# install python3 dependencies
-RUN pip3 install --default-timeout=1000 pyfast==4.6.0
-
 # Install OpenGL
 RUN apt-get install -y \
     libopengl0 \
     libgl1 \
     libusb-1.0-0-dev \
     libcairo2
+
+# install python3 dependencies
+RUN pip3 install --default-timeout=1000 pyfast==4.6.0
