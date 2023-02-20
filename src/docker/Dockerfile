@@ -36,9 +36,3 @@ RUN apt-get install -y \
     libgl1 \
     libusb-1.0-0-dev \
     libcairo2
-
-# CMD
-# ENTRYPOINT ["runPipeline", "--datahub", "breast-tumour-segmentation", "--file"]
-# CMD ["runPipeline", "--datahub", "breast-tumour-segmentation", "--file"]
-
-# runPipeline --datahub breast-tumour-segmentation --file path/to/your/whole-slide-image.vsi
