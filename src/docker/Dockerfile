@@ -1,5 +1,8 @@
 # build custom image from the ubuntu docker image
-FROM ubuntu:20.04
+#FROM ubuntu:20.04
+#FROM nvidia/cuda:11.2.0-runtime-ubuntu20.04
+#FROM tensorflow/tensorflow:2.8.0-gpu
+FROM nvidia/cuda:11.0.3-cudnn8-runtime-ubuntu20.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -34,5 +37,16 @@ RUN apt-get install -y \
     libusb-1.0-0-dev \
     libcairo2
 
+# Install convenience stuff
+RUN apt-get install -y \
+    wget \
+    vim
+
 # install python3 dependencies
 RUN pip3 install --default-timeout=1000 pyfast==4.6.0
+
+# Copy shit
+COPY pipelines/ /opt/pipelines/
+
+# Download test sample and place it in /pipelines/
+RUN cd /opt/pipelines/ && wget https://folk.ntnu.no/andpeder/FastPathology/test_data/WSI/A05.svs

@@ -1,0 +1,19 @@
+PipelineName "Tissue segmentation"
+PipelineDescription "Tissue segmentation using simple color thresholding and morphology"
+PipelineOutputData segmentation segmentation 0
+Attribute classes "Background;Tissue"
+
+ProcessObject WSI WholeSlideImageImporter
+Attribute filename @@wsi@@
+
+ProcessObject segmentation TissueSegmentation
+Input 0 WSI
+
+### Exporters
+
+ProcessObject exporter ImageExporter
+Attribute filename @@output@@
+Input 0 segmentation 0
+
+#ProcessObject ts HDF5TensorExporter
+#Attribute filename @@outputFilename@@".h5"
