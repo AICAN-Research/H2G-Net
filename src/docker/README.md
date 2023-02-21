@@ -15,7 +15,8 @@ sudo apt-get install -y nvidia-docker2
 sudo systemctl restart docker
 ```
 
-## Installing pyFAST with Docker
+## Build Docker image with pyFAST
+
 1. First clone github:
 ```
 git clone
@@ -26,7 +27,24 @@ git clone
 docker build -t h2gnet .
 ```
 
-3. Test running test FPL with FAST in the docker image
+## Verifying that everything works
+
+Test that OpenCL is properly installed:
+
+```
+docker run --rm -it --gpus all -v /tmp/.X11-unix:/tmp/.X11-unix h2gnet clinfo
+```
+
+If you get 0 support OpenCL platforms, then it did not. Otherwise, check if you can import pyFAST:
+
+```
+docker run --rm -it --gpus all -v /tmp/.X11-unix:/tmp/.X11-unix h2gnet python3 -c "import fast; print("It worked!")"
+```
+
+If you did not get the `It worked!` print, then import failed. Lastly, try to run the tissue segmentation pipeline:
+
 ```
 docker run --rm -it --gpus all -v /tmp/.X11-unix:/tmp/.X11-unix h2gnet python3 /opt/tmp/deploy.py
 ```
+
+If `True` was prompted at the end, the FPL generated a result on disk, and then FAST is properly setup with Docker!
