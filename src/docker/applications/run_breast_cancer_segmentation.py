@@ -24,4 +24,5 @@ pipeline.parse()
 pipeline.getProcessObject('pwExporter').run()
 pipeline.getProcessObject('segExporter').run()
 
-print("Result saved at:", output)
+print("Was export successful:", os.path.exists(output + ".tiff"))
+print("Result is saved at:", output)

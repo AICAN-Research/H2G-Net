@@ -41,10 +41,16 @@ If you get 0 support OpenCL platforms, then it did not. Otherwise, check if you 
 docker run --rm -it --gpus all -v /tmp/.X11-unix:/tmp/.X11-unix h2gnet python3 -c "import fast; print("It worked!")"
 ```
 
-If you did not get the `It worked!` print, then import failed. Lastly, try to run the tissue segmentation pipeline:
+If you did not get the `It worked!` print, then import failed. Now, try to run the tissue segmentation pipeline:
 
 ```
-docker run --rm -it --gpus all -v /tmp/.X11-unix:/tmp/.X11-unix h2gnet python3 /opt/tmp/deploy.py
+docker run --rm -it --gpus all -v /tmp/.X11-unix:/tmp/.X11-unix h2gnet python3 /opt/applications/run_tissue_segmentation.py
 ```
 
-If `True` was prompted at the end, the FPL generated a result on disk, and then FAST is properly setup with Docker!
+It should prompt whether the result was exported on disk and location if successful. If so, then try to run H2G-Net with inference engine:
+
+```
+docker run --rm -it --gpus all -v /tmp/.X11-unix:/tmp/.X11-unix h2gnet python3 /opt/applications/run_breast_tumour_segmentation.py
+```
+
+If result was successfully stored on disk, then FAST is properly setup with Docker!
