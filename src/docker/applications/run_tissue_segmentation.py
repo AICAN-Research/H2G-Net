@@ -9,4 +9,3 @@ pipeline = fast.Pipeline('/opt/pipelines/tissue.fpl', {'wsi': '/opt/pipelines/A0
 pipeline.parse()
 pipeline.getProcessObject('exporter').run()
 print("Were export successful:", os.path.exists('/opt/pipelines/prediction.png'))
-

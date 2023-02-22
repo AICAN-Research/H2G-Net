@@ -47,6 +47,7 @@ RUN pip3 install --default-timeout=1000 pyfast==4.6.0
 
 # Copy shit
 COPY pipelines/ /opt/pipelines/
+COPY applications/ /opt/applications/
 
 # Download test sample and place it in /pipelines/
 RUN cd /opt/pipelines/ && wget https://folk.ntnu.no/andpeder/FastPathology/test_data/WSI/A05.svs

@@ -1,0 +1,56 @@
+PipelineName "Breast Tumour Segmentation (pw + refinement)"
+PipelineDescription "Segmentation of breast tumour tissue using H2G-Net https://github.com/andreped/H2G-Net"
+PipelineOutputData segmentation refinement 0
+PipelineOutputData heatmap finish 0
+
+### Processing chain
+
+ProcessObject WSI WholeSlideImageImporter
+Attribute filename @@wsi@@
+
+ProcessObject tissueSeg TissueSegmentation
+Input 0 WSI 0
+
+ProcessObject patch PatchGenerator
+Attribute patch-size 256 256
+Attribute patch-magnification 10
+Input 0 WSI 0
+Input 1 tissueSeg 0
+
+ProcessObject network NeuralNetwork
+Attribute model @@pwModel@@
+Attribute scale-factor 0.003921568627451
+Input 0 patch 0
+
+ProcessObject stitcher PatchStitcher
+Input 0 network 0
+
+ProcessObject finish RunUntilFinished
+Input 0 stitcher 0
+
+ProcessObject tensorToImage TensorToImage
+Attribute channels 1
+Input 0 finish 0
+
+ProcessObject lowRes ImagePyramidLevelExtractor
+Attribute level -1
+Input 0 WSI
+
+ProcessObject scale IntensityNormalization
+Input 0 lowRes 0
+
+ProcessObject refinement SegmentationNetwork
+Attribute inference-engine OpenVINO
+Attribute model @@refinementModel@@
+Input 0 scale 0
+Input 1 tensorToImage 0
+
+### Exporters
+
+ProcessObject pwExporter HDF5TensorExporter
+Attribute filename @@output@@".h5"
+Input 0 finish 0
+
+ProcessObject segExporter TIFFImagePyramidExporter
+Attribute filename @@output@@".tiff"
+Input 0 refinement 0
