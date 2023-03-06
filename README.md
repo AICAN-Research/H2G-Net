@@ -46,7 +46,7 @@ Or you can test the model in the graphical user interface [FastPathology](https:
 ## How to cite
 Please, cite our paper if you find the work useful:
 <pre>
-  @article{10.3389/fmed.2022.971873,
+@article{10.3389/fmed.2022.971873,
   author={Pedersen, André and Smistad, Erik and Rise, Tor V. and Dale, Vibeke G. and Pettersen, Henrik S. and Nordmo, Tor-Arne S. and Bouget, David and Reinertsen, Ingerid and Valla, Marit},
   title={H2G-Net: A multi-resolution refinement approach for segmentation of breast cancer region in gigapixel histopathological images},
   journal={Frontiers in Medicine},
@@ -54,7 +54,8 @@ Please, cite our paper if you find the work useful:
   year={2022},
   url={https://www.frontiersin.org/articles/10.3389/fmed.2022.971873},
   doi={10.3389/fmed.2022.971873},
-  issn={2296-858X}}
+  issn={2296-858X}
+}
 </pre>
 
 ## Contact
@@ -63,21 +64,23 @@ Please, contact andre.pedersen@ntnu.no for any further questions.
 ## Acknowledgements
 Code for the AGU-Net and DAGU-Net architectures were based on the publication:
 <pre>
-  @misc{bouget2021meningioma,
+@misc{bouget2021meningioma,
   title={Meningioma segmentation in T1-weighted MRI leveraging global context and attention mechanisms},
   author={David Bouget and André Pedersen and Sayied Abdol Mohieb Hosainey and Ole Solheim and Ingerid Reinertsen},
   year={2021},
   eprint={2101.07715},
   archivePrefix={arXiv},
-  primaryClass={eess.IV}}
+  primaryClass={eess.IV}
+}
 </pre>
 
 Code for the DoubleU-Net architectures were based on the official GitHub [repository](https://github.com/DebeshJha/2020-CBMS-DoubleU-Net), based on this publication:
 <pre>
-  @INPROCEEDINGS{9183321,
+@INPROCEEDINGS{9183321,
   author={D. {Jha} and M. A. {Riegler} and D. {Johansen} and P. {Halvorsen} and H. D. {Johansen}},
   booktitle={2020 IEEE 33rd International Symposium on Computer-Based Medical Systems (CBMS)}, 
   title={DoubleU-Net: A Deep Convolutional Neural Network for Medical Image Segmentation}, 
   year={2020},
-  pages={558-564}}
+  pages={558-564}
+}
 </pre>
