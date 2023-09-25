@@ -59,7 +59,7 @@ Please, cite our paper if you find the work useful:
 </pre>
 
 ## Contact
-Please, contact andre.pedersen@ntnu.no for any further questions.
+Please, contact andrped94@gmail.com for any further questions.
 
 ## Acknowledgements
 Code for the AGU-Net and DAGU-Net architectures were based on the publication:
