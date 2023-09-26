@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Paper](https://zenodo.org/badge/DOI/10.3389/fneur.2022.932219.svg)](https://doi.org/10.3389/fmed.2022.971873)  
 
-⚠️***Latest: Won best poster award at the HMN RHF RDR 2022 conference!***
+⚠️***Latest: Both pretrained models have been made openly available [here](https://github.com/andreped/H2G-Net/releases/tag/pretrained-models) !***
 
 This repository contains the code relevant for the proposed design H2G-Net, which was introduced in the manuscript [*"H2G-Net: A multi-resolution refinement approach for segmentation of breast cancer region in gigapixel histopathological images"*](https://www.frontiersin.org/articles/10.3389/fmed.2022.971873/full), published in Frontiers in Medicine.
 
