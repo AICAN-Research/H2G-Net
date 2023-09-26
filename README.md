@@ -1,7 +1,8 @@
 # H2G-Net
 
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![Paper](https://zenodo.org/badge/DOI/10.3389/fneur.2022.932219.svg)](https://doi.org/10.3389/fmed.2022.971873)  
+[![Paper](https://zenodo.org/badge/DOI/10.3389/fneur.2022.932219.svg)](https://doi.org/10.3389/fmed.2022.971873)
+[![Poster](https://img.shields.io/badge/Poster-PDF-f39f37)](https://github.com/andreped/H2G-Net/blob/main/poster/poster.pdf)
 
 ⚠️***Latest: Both pretrained models have been made openly available [here](https://github.com/andreped/H2G-Net/releases/tag/pretrained-models) !***
 
