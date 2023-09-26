@@ -8,6 +8,8 @@
 
 This repository contains the code relevant for the proposed design H2G-Net, which was introduced in the manuscript [*"H2G-Net: A multi-resolution refinement approach for segmentation of breast cancer region in gigapixel histopathological images"*](https://www.frontiersin.org/articles/10.3389/fmed.2022.971873/full), published in Frontiers in Medicine.
 
+The work was also presented at a region conference (HMN RHF 2022), where it won best poster award!
+
 ## Brief summary of the paper and contributions
 
 We propose a cascaded convolutional neural network for semantic segmentation of breast cancer tumours from whole slide images (WSIs). It is a two-stage design. In the first stage (detection stage), we apply a patch-wise classifier across the image which produces a tumour probability heatmap. In the second stage (refinement stage), we merge the resultant heatmap with a low-resolution version of the original WSI, before we send it to a new convolutional autoencoder that produces a final segmentation of the tumour ROI.
