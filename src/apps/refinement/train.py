@@ -282,7 +282,6 @@ if __name__ == "__main__":
             mode=curr_mode,
         )
 
-
     # history logging
     csv_logger = CSVLogger(history_path + "history_" + name + ".csv", append=True, separator=';')
 
