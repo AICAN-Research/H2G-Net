@@ -1,4 +1,5 @@
 \documentclass[portrait,a0paper,fontscale=0.292]{baposter}
+%\documentclass[portrait,a0paper,fontscale=0.292,finalpaperheight=1189mm,finalpaperwidth=841mm]{baposter}
 
 \usepackage[vlined]{algorithm2e}
 \usepackage{times}
@@ -29,7 +30,6 @@
 \setlist[itemize]{leftmargin=*,nosep}
  \setlength{\columnsep}{0.7em}
  \setlength{\columnseprule}{0mm}
-
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % % Save space in lists. Use this after the opening of the list
@@ -248,16 +248,16 @@
             %\multicolumn{2}{l}{\textbf{Architecture}} & \textbf{Recall} & \textbf{Precision} & \textbf{DSC} \\
             & \textbf{Designs} & \textbf{Recall} & \textbf{Precision} & \textbf{DSC} \\
             \midrule
-            \textbf{(\rom{1})} & \textbf{Otsu} & $0.990 \pm 0.027$ & $0.534 \pm 0.200$ & $0.669 \pm 0.179$ \\
-            \textbf{(\rom{2})} & \textbf{UNet-LR} & $0.931 \pm 0.113$ & $0.851 \pm 0.165$ & $0.874 \pm 0.128$ \\
-            \textbf{(\rom{3})} & \textbf{Inc-PW} & $0.881 \pm 0.118$ & $0.909 \pm 0.099$ & $0.887 \pm 0.089$ \\
-            \textbf{(\rom{4})} & \textbf{Mob-PW} & $0.879 \pm 0.123$ & $0.907 \pm 0.100$ & $0.885 \pm 0.094$ \\
-            \textbf{(\rom{5})} & \textbf{Mob-KM-PW} & $0.853 \pm 0.124$ & $0.909 \pm 0.097$ & $0.872 \pm 0.092$ \\
-            %\textbf{(\rom{6})} & \textcolor{red}{\textbf{Mob-PW-UNet}} & $0.944 \pm 0.074$ & $\boldsymbol{0.929 \pm 0.088}$ & $\boldsymbol{0.933 \pm 0.069}$ \\
-            \textbf{(\rom{6})} & \textbf{Mob-PW-AGUNet} & $\boldsymbol{0.954 \pm 0.066}$ & $0.909 \pm 0.097$ & $0.927 \pm 0.072$ \\
-            \textbf{(\rom{7})} & \textbf{Mob-PW-DAGUNet} & $0.942 \pm 0.075$ & $0.922 \pm 0.091$ & $0.928 \pm 0.072$ \\
-            \textbf{(\rom{8})} & \textbf{Mob-PW-DoubleUNet} & $0.949 \pm 0.073$ & $0.919 \pm 0.093$ & $0.929 \pm 0.074$ \\
-            \textbf{(\rom{9})} & \textbf{H2G-Net} & $0.944 \pm 0.074$ & $\boldsymbol{0.929 \pm 0.088}$ & $\boldsymbol{0.933 \pm 0.069}$ \\
+            \textbf{(\rom{1})} & \textbf{Otsu} & 0.990 ± 0.027 & 0.534 ± 0.200 & 0.669 ± 0.179 \\
+            \textbf{(\rom{2})} & \textbf{UNet-LR} & 0.931 ± 0.113 & 0.851 ± 0.165 & 0.874 ± 0.128 \\
+            \textbf{(\rom{3})} & \textbf{Inc-PW} & 0.881 ± 0.118 & 0.909 ± 0.099 & 0.887 ± 0.089 \\
+            \textbf{(\rom{4})} & \textbf{Mob-PW} & 0.879 ± 0.123 & 0.907 ± 0.100 & 0.885 ± 0.094 \\
+            \textbf{(\rom{5})} & \textbf{Mob-KM-PW} & 0.853 ± 0.124 & 0.909 ± 0.097 & 0.872 ± 0.092 \\
+            %\textbf{(\rom{6})} & \textcolor{red}{\textbf{Mob-PW-UNet}} & 0.944 ± 0.074 & \textbf{0.929 ± 0.088} & \textbf{0.933 ± 0.069} \\
+            \textbf{(\rom{6})} & \textbf{Mob-PW-AGUNet} & \textbf{0.954 ± 0.066} & 0.909 ± 0.097 & 0.927 ± 0.072 \\
+            \textbf{(\rom{7})} & \textbf{Mob-PW-DAGUNet} & 0.942 ± 0.075 & 0.922 ± 0.091 & 0.928 ± 0.072 \\
+            \textbf{(\rom{8})} & \textbf{Mob-PW-DoubleUNet} & 0.949 ± 0.073 & 0.919 ± 0.093 & 0.929 ± 0.074 \\
+            \textbf{(\rom{9})} & \textbf{H2G-Net} & 0.944 ± 0.074 & \textbf{0.929 ± 0.088} & \textbf{0.933 ± 0.069} \\
             \bottomrule
         \end{tabular}
         }
