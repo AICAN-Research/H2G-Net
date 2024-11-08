@@ -2,3 +2,6 @@ venv/
 .vs/
 .idea/
 *__pycache__/
+*.h5
+*.onnx
+*.DS_Store
