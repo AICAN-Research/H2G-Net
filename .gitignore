@@ -4,3 +4,4 @@ venv/
 *__pycache__/
 *.h5
 *.onnx
+*.DS_Store
