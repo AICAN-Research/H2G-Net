@@ -43,7 +43,7 @@ RUN apt-get install -y \
     vim
 
 # install python3 dependencies
-RUN pip3 install --default-timeout=1000 pyfast==4.6.0
+RUN pip3 install --default-timeout=1000 pyFAST
 
 # Copy shit
 COPY pipelines/ /opt/pipelines/
