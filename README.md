@@ -34,7 +34,7 @@ First make sure you have [all requirements for FAST installed](https://fast.erik
 Then install FAST using pip, and run the breast tumour segmentation pipeline from your terminal.
 This will download the model, run it on the WSI you specify and visualize the results.
 ```bash
-pip install pyfast
+pip install pyFAST
 runPipeline --datahub breast-tumour-segmentation --file path/to/your/whole-slide-image.vsi
 ```
 
